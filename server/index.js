@@ -17,5 +17,12 @@ const app = express();
 const bodyParser = require('body-parser');
 const cors = require('cors');
 
-app.listen(3333, () => console.log('Running on port 3333'));
+// Middlewares
+app.use(cors());
+app.use(express.json());
+app.use(bodyParser.urlencoded({extended: true}));
 
+
+
+// Porte du Server Back-end
+app.listen(3333, () => console.log('Running on port 3333'));
