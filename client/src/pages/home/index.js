@@ -8,6 +8,8 @@ function Home(){
     // hooks to store the value of the insert form inputs "Movie Name" and "Review"
     const [movieName, setMovieName] = useState("");
     const [review, setReview] = useState("");
+    // hook to save the updated review
+    const [newReview, setNewReview] = useState('');
 
     // Connect to the API and recive all the movies
     useEffect(() => {
@@ -18,7 +20,8 @@ function Home(){
         });
     }, []);
 
-    // submit a Movie and show the changements on live
+    // Submit a Movie
+    // Show the changements on live
     const submitMovie = () => {
         axios.post('http://localhost:3004/api/insert', {
             movieName: movieName, // hook movieName
@@ -34,13 +37,25 @@ function Home(){
     };
 
     // Delete a movie and Review
-    // Show the changement on live
+    // Show the changements on live
     const deleteMovie = (movie) => {
         axios.delete(`http://localhost:3004/api/delete/${movie._id}`);
         const newList = movieReviewList.filter((item) => item._id !== movie._id);
         console.log(newList);
         setMovieReviewList(newList);
     };
+
+    // Edit the review of a spécific Movie
+    // Show the changements on live
+    const updateReview = (movie, key) => {
+        axios.put(`http://localhost:3004/api/update/${movie._id}`, {
+            movieReview: newReview
+        });
+        movieReviewList[key].review = newReview;
+        console.log(newReview);
+        setNewReview("");
+    };
+
 
     return (
         <div className="App">
@@ -66,7 +81,15 @@ function Home(){
                     <div key={key}>
                         <li>Movie Name: {data.name}</li>
                         <li>Movie Review: {data.review}</li>
-                        <button onClick={() => deleteMovie(data)} >Delete</button>
+                        <div>
+                            <button onClick={(e) => {
+                                updateReview(data, key);
+                                e.target.parentNode.querySelector('#updateInput').value = "";
+                            }} >Update</button>
+                            <input type="text" id="updateInput" onChange={(e) => setNewReview(e.target.value)}/>
+                            <button onClick={() => deleteMovie(data)} >Delete</button>
+                        </div>
+                        
                     </div>
                 )
             })}
