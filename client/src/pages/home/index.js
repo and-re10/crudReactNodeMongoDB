@@ -83,7 +83,7 @@ function Home(){
             {movieReviewList.map((data, key) => {
                 return (
                     <div key={key}>
-                        <li>Movie Name: {data.name}</li>
+                        <li>Movie Name: <Link to={`/${data._id}`}>{data.name}</Link></li>
                         <li>Movie Review: {data.review}</li>
                         <div>
                             <button onClick={(e) => {

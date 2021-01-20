@@ -1,8 +1,21 @@
-import React from "react";
+import React, { useEffect, useState } from "react";
 import "./style.css";
-import { Link } from "react-router-dom";
+import { Link, useParams } from "react-router-dom";
+import axios from "axios";
  
 function OneMovie(){
+
+    const { id } = useParams();
+    const [data, setData] = useState([]);
+
+    useEffect(() => {
+        axios.get(`http://localhost:3004/api/movies/${id}`).then(response => {
+            console.log(response.data);
+            setData(response.data)
+        });
+
+    }, [id])
+
     return (
         <>
             <h1>Page OneMovie</h1>
@@ -11,9 +24,9 @@ function OneMovie(){
                 <Link to="/about">About</Link>
             </nav>
             <ul>
-                <li>ID: </li>
-                <li>NAME: </li>
-                <li>REVIEW: </li>
+                <li>ID: {data?._id}</li>
+                <li>NAME: {data?.name}</li>
+                <li>REVIEW: {data?.review}</li>
             </ul>
             </>
     );
