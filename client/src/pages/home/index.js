@@ -1,6 +1,7 @@
 import React, { useState, useEffect } from "react";
 import "./style.css";
 import axios from 'axios';
+import { Link } from "react-router-dom";
 
 function Home(){
     // hook to store the data from the l'api
@@ -61,6 +62,9 @@ function Home(){
         <div className="App">
             <h1>CRUD APPLICATION</h1>
             <h1>Home</h1>
+            <nav className="nav">
+                <Link to="/about">About</Link>
+            </nav>
 
             <div className="form">
                 {/* Input Name */}
