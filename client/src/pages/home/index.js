@@ -63,41 +63,48 @@ function Home(){
             <h1>CRUD APPLICATION</h1>
             <h1>Home</h1>
             <nav className="nav">
-                <Link to="/about">About</Link>
+                <Link to="/about" className="link">About</Link>
             </nav>
 
             <div className="form">
-                {/* Input Name */}
-                <label>Movie Name</label>
-                <input type="text" name="movieName" id="InputName" onChange={e => setMovieName(e.target.value) }/>
-                {/* Input Review */}
-                <label>Movie Review</label>
-                <input type="text" name="movieReview" id="InputReview" onChange={e => setReview(e.target.value) }/>
+                <div className="row">
+                    <div>
+                        {/* Input Name */}
+                        <label>Movie Name</label>
+                        <input type="text" name="movieName" id="InputName" onChange={e => setMovieName(e.target.value) }/>
+                    </div>
+                    <div>
+                        {/* Input Review */}
+                        <label>Movie Review</label>
+                        <input type="text" name="movieReview" id="InputReview" onChange={e => setReview(e.target.value) }/>
+                    </div>
+                </div>
+                {/* Button Submit */}
                 <button onClick={e => {
                     submitMovie();
                     e.target.parentNode.querySelector("#InputName").value = "";
                     e.target.parentNode.querySelector("#InputReview").value = "";
-                }} >Submit</button>
+                }} >Add Movie</button>
             </div>
-            <ul>
+            <div className="container">
             {movieReviewList.map((data, key) => {
                 return (
-                    <div key={key}>
-                        <li>Movie Name: <Link to={`/${data._id}`}>{data.name}</Link></li>
-                        <li>Movie Review: {data.review}</li>
-                        <div>
-                            <button onClick={(e) => {
+                    <div key={key} className="card">
+                        <p>Movie Name: <Link className="link" to={`/${data._id}`}>{data.name}</Link></p>
+                        <p>Movie Review: {data.review}</p>
+                        <div className>
+                            <button className="btn_update" onClick={(e) => {
                                 updateReview(data, key);
                                 e.target.parentNode.querySelector('#updateInput').value = "";
                             }} >Update</button>
                             <input type="text" id="updateInput" onChange={(e) => setNewReview(e.target.value)}/>
-                            <button onClick={() => deleteMovie(data)} >Delete</button>
+                            <button className="btn_delete" onClick={() => deleteMovie(data)} >Delete</button>
                         </div>
                         
                     </div>
                 )
             })}
-            </ul>
+            </div>
         </div>
     );
 };

@@ -4,10 +4,10 @@ import { Link } from "react-router-dom";
 
 function About(){
     return (
-        <div>
+        <div className="App">
             <h1>About</h1>
             <nav className="nav">
-                <Link to="/">Home</Link>
+                <Link className="link" to="/">Home</Link>
             </nav>
         </div> 
     );
