@@ -17,18 +17,20 @@ function OneMovie(){
     }, [id])
 
     return (
-        <>
-            <h1>Page OneMovie</h1>
+        <div className="App">
+            <h1>Page {data.name}</h1>
             <nav className="nav">
-                <Link to="/">Home</Link>
-                <Link to="/about">About</Link>
+                <Link className="link" to="/">Home</Link>
+                <Link className="link" to="/about">About</Link>
             </nav>
-            <ul>
-                <li>ID: {data?._id}</li>
-                <li>NAME: {data?.name}</li>
-                <li>REVIEW: {data?.review}</li>
-            </ul>
-            </>
+            <div className="list">
+                <div>
+                    <p><span className="title">ID:</span> {data?._id}</p>
+                    <p><span className="title">NAME:</span> {data?.name}</p>
+                    <p><span className="title">REVIEW:</span> {data?.review}</p>
+                </div>
+            </div>
+        </div>
     );
 };
 
