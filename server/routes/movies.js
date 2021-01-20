@@ -40,6 +40,17 @@ router.get("/movies/:movieId", async (req, res) => {
     };
 });
 
+// Delete a Movie
+router.delete('/delete/:movieId', async (req, res) => {
+    try {
+        const movie = await Movie.deleteOne({ _id: req.params.movieId });
+        console.log(movie);
+        res.send(movie);
+    } catch (error) {
+        console.error(error);
+    };
+});
+
 module.exports = router;
 
 
