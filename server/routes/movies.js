@@ -19,12 +19,23 @@ router.post('/insert', async (req, res) => {
 });
 
 // Show all the Movies
-router.get('/all', async (req, res) => {
+router.get('/movies', async (req, res) => {
     try {
         const movies = await Movie.find();
         console.log(movies)
         res.send(movies);
     } catch(error){
+        console.error(error);
+    };
+});
+
+// Show a specific Movie
+router.get("/movies/:movieId", async (req, res) => {
+    try {
+        const movie = await Movie.findById( req.params.movieId );
+        console.log(movie);
+        res.send(movie);
+    } catch (error) {
         console.error(error);
     };
 });
