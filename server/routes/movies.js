@@ -18,6 +18,16 @@ router.post('/insert', async (req, res) => {
     }
 });
 
+// Show all the Movies
+router.get('/all', async (req, res) => {
+    try {
+        const movies = await Movie.find();
+        console.log(movies)
+        res.send(movies);
+    } catch(error){
+        console.error(error);
+    };
+});
 
 module.exports = router;
 
