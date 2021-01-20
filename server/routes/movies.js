@@ -51,6 +51,23 @@ router.delete('/delete/:movieId', async (req, res) => {
     };
 });
 
+// Update the Review of a specific Movie
+router.put('/update/:movieId', async (req, res) => {
+    try {
+        const updatedReview = await Movie.updateOne({ 
+            _id: req.params.movieId
+        }, {
+            $set: {
+                review: req.body.movieReview
+            }
+        });
+        console.log(updatedReview);
+        res.send(updatedReview);
+    } catch (error) {
+        console.error(error);
+    };
+})
+
 module.exports = router;
 
 
