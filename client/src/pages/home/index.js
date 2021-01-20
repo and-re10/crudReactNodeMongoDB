@@ -33,6 +33,15 @@ function Home(){
         ]);
     };
 
+    // Delete a movie and Review
+    // Show the changement on live
+    const deleteMovie = (movie) => {
+        axios.delete(`http://localhost:3004/api/delete/${movie._id}`);
+        const newList = movieReviewList.filter((item) => item._id !== movie._id);
+        console.log(newList);
+        setMovieReviewList(newList);
+    };
+
     return (
         <div className="App">
             <h1>CRUD APPLICATION</h1>
@@ -57,6 +66,7 @@ function Home(){
                     <div key={key}>
                         <li>Movie Name: {data.name}</li>
                         <li>Movie Review: {data.review}</li>
+                        <button onClick={() => deleteMovie(data)} >Delete</button>
                     </div>
                 )
             })}
